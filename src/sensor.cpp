@@ -11,7 +11,14 @@ static const char TAG[] = __FILE__;
   10 // max. size of user sensor data buffer in bytes [default=20]
 
 void sensor_init(void) {
-  dht.begin();
+  #if (USE_DHT)
+    dht.begin();
+  #endif
+  #if (USE_SWITCH)
+    pinMode(SWITCH_PIN, INPUT_PULLUP);
+    attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), SwitchIRQ, RISING);
+  #endif
+
   // this function is called during device startup
   // put your user sensor initialization routines here
 }
@@ -45,29 +52,29 @@ uint8_t *sensor_read(uint8_t sensor) {
   uint8_t length = 3;
   uint8_t h;
   int16_t t;
+  int8_t buttonState;
   switch (sensor) {
 
+  #if (USE_DHT)
   case 1:
-
     h = dht.readHumidity();
     t = 10 * dht.readTemperature();
-    Serial.println("Temperature: " + String(t));
-    Serial.println("Humidity: " + String(h));
 
     buf[0] = length;
     buf[1] = t >> 8;
     buf[2] = t;
     buf[3] = h;
     break;
-
+  #endif
+  #if (USE_SWITCH)
   case 2:
-
-    buf[0] = length;
-    buf[1] = 0x01;
-    buf[2] = 0x02;
-    buf[3] = 0x03;
+    buttonState = digitalRead(SWITCH_PIN);
+    if (buttonState == HIGH) {
+      buf[0] = 1;
+      buf[1] = 0x01;
+    }
     break;
-
+  #endif
   case 3:
 
     buf[0] = length;

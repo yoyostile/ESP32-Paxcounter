@@ -133,21 +133,27 @@ void sendData() {
 #endif
 
 #if (HAS_SENSORS)
+    #if (USE_DHT)
     case SENSOR1_DATA:
       payload.reset();
       payload.addSensor(sensor_read(1));
       SendPayload(SENSOR1PORT, prio_normal);
       break;
+    #endif
+    #if (USE_SWITCH)
     case SENSOR2_DATA:
       payload.reset();
       payload.addSensor(sensor_read(2));
-      SendPayload(SENSOR2PORT, prio_normal);
+      if (payload.getSize() == 1) {
+        SendPayload(SENSOR2PORT, prio_normal);        
+      }
       break;
-    case SENSOR3_DATA:
-      payload.reset();
-      payload.addSensor(sensor_read(3));
-      SendPayload(SENSOR3PORT, prio_normal);
-      break;
+    #endif
+    // case SENSOR3_DATA:
+    //   payload.reset();
+    //   payload.addSensor(sensor_read(3));
+    //   SendPayload(SENSOR3PORT, prio_normal);
+    //   break;
 #endif
 
 #if (defined BAT_MEASURE_ADC || defined HAS_PMU)

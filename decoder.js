@@ -99,6 +99,11 @@ function Decoder(bytes, port) {
         }
     }
 
+    if (port === 11) {
+        if (bytes.length === 1) {
+            return decode(bytes, [int8], ['mail']);
+        }
+    }
 }
 
 

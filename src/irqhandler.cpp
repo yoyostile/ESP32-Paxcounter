@@ -36,6 +36,13 @@ void irqHandler(void *pvParameters) {
     }
 #endif
 
+#ifdef USE_SWITCH
+  if (InterruptStatus & SWITCH_IRQ) {
+    sendData();
+    InterruptStatus &= ~SWITCH_IRQ;
+  }
+#endif
+
 // display needs refresh?
 #ifdef HAS_DISPLAY
     if (InterruptStatus & DISPLAY_IRQ) {
@@ -121,6 +128,18 @@ void IRAM_ATTR ButtonIRQ() {
   BaseType_t xHigherPriorityTaskWoken = pdFALSE;
 
   xTaskNotifyFromISR(irqHandlerTask, BUTTON_IRQ, eSetBits,
+                     &xHigherPriorityTaskWoken);
+
+  if (xHigherPriorityTaskWoken)
+    portYIELD_FROM_ISR();
+}
+#endif
+
+#ifdef USE_SWITCH
+void IRAM_ATTR SwitchIRQ() {
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+
+  xTaskNotifyFromISR(irqHandlerTask, SWITCH_IRQ, eSetBits,
                      &xHigherPriorityTaskWoken);
 
   if (xHigherPriorityTaskWoken)
