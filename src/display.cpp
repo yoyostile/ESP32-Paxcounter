@@ -349,7 +349,12 @@ void draw_page(time_t t, uint8_t page) {
 #endif // HAS_BME
 
 #else
-    dp_printf(16, 5, FONT_STRETCHED, 1, "No BME");
+    #if (USE_DHT)
+      dp_printf(0, 2, FONT_STRETCHED, 0, "TMP:%-2.1f", dht.readTemperature());
+      dp_printf(0, 4, FONT_STRETCHED, 0, "HUM:%-2.1f", dht.readHumidity());
+    #else
+      dp_printf(16, 5, FONT_STRETCHED, 1, "No BME");
+    #endif
 #endif
 
     break; // page3

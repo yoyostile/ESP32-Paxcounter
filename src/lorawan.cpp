@@ -263,7 +263,8 @@ void lora_send(void *pvParameters) {
     else {
 
       // switch (LMIC_sendWithCallback_strict(
-      switch (LMIC_sendWithCallback(
+      LMIC_setDrTxpow(assertDR(cfg.loradr), cfg.txpower);
+      switch (LMIC_sendWithCallback_strict(
           SendBuffer.MessagePort, SendBuffer.Message, SendBuffer.MessageSize,
           (cfg.countermode & 0x02), myTxCallback, NULL)) {
 

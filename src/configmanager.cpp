@@ -17,7 +17,7 @@ esp_err_t err;
 void defaultConfig() {
   cfg.loradr = LORADRDEFAULT;     // 0-15, lora datarate, see paxcounter.conf
   cfg.txpower = LORATXPOWDEFAULT; // 0-15, lora tx power
-  cfg.adrmode = 1;                // 0=disabled, 1=enabled
+  cfg.adrmode = LORAADRDEFAULT;   // 0=disabled, 1=enabled
   cfg.screensaver = 0;            // 0=disabled, 1=enabled
   cfg.screenon = 1;               // 0=disabled, 1=enabled
   cfg.countermode = COUNTERMODE;  // 0=cyclic, 1=cumulative, 2=cyclic confirmed

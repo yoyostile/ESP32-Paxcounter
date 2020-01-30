@@ -29,6 +29,8 @@
 //#define BAT_MEASURE_ADC_UNIT 2 // ADC 2
 //#define BAT_VOLTAGE_DIVIDER 2 // voltage divider 220k/100k on board
 
+#define HAS_SENSORS 1 // comment out if device has user defined sensors
+
 #define EXT_POWER_SW Vext // switches battery power, Vext control 0 = on / 1 = off
 #define EXT_POWER_ON    0
 //#define EXT_POWER_OFF   1
