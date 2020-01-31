@@ -9,6 +9,7 @@
 #define MASK_IRQ 0x020
 #define UNMASK_IRQ 0x040
 #define BME_IRQ 0x080
+#define DHT_IRQ 0x90
 #define MATRIX_DISPLAY_IRQ 0x100
 #define PMU_IRQ 0x200
 #define SWITCH_IRQ 0x300
@@ -18,6 +19,7 @@
 #include "senddata.h"
 #include "timekeeper.h"
 #include "bmesensor.h"
+#include "dhtsensor.h"
 #include "power.h"
 
 void irqHandler(void *pvParameters);

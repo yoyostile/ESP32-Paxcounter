@@ -111,6 +111,11 @@ typedef struct {
   float gas;             // raw gas sensor signal
 } bmeStatus_t;
 
+typedef struct {
+  float temperature;
+  float humidity;
+} dhtStatus_t;
+
 extern std::set<uint16_t, std::less<uint16_t>, Mallocator<uint16_t>> macs;
 extern std::array<uint64_t, 0xff>::iterator it;
 extern std::array<uint64_t, 0xff> beacons;
@@ -166,6 +171,10 @@ extern RTC_DATA_ATTR runmode_t RTC_runmode;
 
 #if (HAS_BME)
 #include "bmesensor.h"
+#endif
+
+#if (HAS_DHT)
+#include "dhtsensor.h"
 #endif
 
 #endif

@@ -117,6 +117,14 @@ void sendData() {
       break;
 #endif
 
+#if (HAS_DHT)
+  case MEMS_DATA:
+    payload.reset();
+    payload.addDHT(dht_status);
+    SendPayload(DHTPORT, prio_normal);
+    break;
+#endif
+
 #if (HAS_GPS)
     case GPS_DATA:
       if (GPSPORT != COUNTERPORT) {
@@ -133,13 +141,11 @@ void sendData() {
 #endif
 
 #if (HAS_SENSORS)
-    #if (USE_DHT)
-    case SENSOR1_DATA:
-      payload.reset();
-      payload.addSensor(sensor_read(1));
-      SendPayload(SENSOR1PORT, prio_normal);
-      break;
-    #endif
+    // case SENSOR1_DATA:
+    //   payload.reset();
+    //   payload.addSensor(sensor_read(1));
+    //   SendPayload(SENSOR1PORT, prio_normal);
+    //   break;
     #if (USE_SWITCH)
     case SENSOR2_DATA:
       payload.reset();

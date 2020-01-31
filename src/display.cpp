@@ -360,9 +360,9 @@ start:
     dp_printf(0, 6, FONT_STRETCHED, 0, "PRE:%-2.1f", bme_status.pressure);
 #endif     // HAS_BME680
 #else
-    #if (USE_DHT)
-      dp_printf(0, 2, FONT_STRETCHED, 0, "TMP:%-2.1f", dht.readTemperature());
-      dp_printf(0, 4, FONT_STRETCHED, 0, "HUM:%-2.1f", dht.readHumidity());
+    #if (HAS_DHT)
+      dp_printf(0, 2, FONT_STRETCHED, 0, "TMP:%-2.1f", dht_status.temperature);
+      dp_printf(0, 4, FONT_STRETCHED, 0, "HUM:%-2.1f", dht_status.humidity);
     #else
       dp_printf(16, 5, FONT_STRETCHED, 1, "No BME");
     #endif

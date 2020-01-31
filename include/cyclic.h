@@ -14,6 +14,10 @@
 #include "bmesensor.h"
 #endif
 
+#if (HAS_DHT)
+#include "dhtsensor.h"
+#endif
+
 #ifdef HAS_DISPLAY
 #include "display.h"
 #endif

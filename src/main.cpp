@@ -402,6 +402,11 @@ void setup() {
     ESP_LOGI(TAG, "Starting BME sensor...");
 #endif
 
+#if (HAS_DHT)
+  if(dht_init())
+    ESP_LOGI(TAG, "Starting DHT sensor...");
+#endif
+
   // starting timers and interrupts
   assert(irqHandlerTask != NULL); // has interrupt handler task started?
   ESP_LOGI(TAG, "Starting Timers...");

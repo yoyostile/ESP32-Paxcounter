@@ -87,6 +87,11 @@ void doHousekeeping() {
 #endif
 #endif
 
+#if (HAS_DHT)
+  ESP_LOGI(TAG, "DHT11/22 Temp: %.2f°C | Humidity: %.2f", dht_status.temperature,
+           dht_status.humidity);
+#endif
+
   // check free heap memory
   if (ESP.getMinFreeHeap() <= MEM_LOW) {
     ESP_LOGI(TAG,

@@ -70,6 +70,9 @@ function Decoder(bytes, port) {
     }
 
     if (port === 7) {
+        if (bytes.length === 3) {
+            return decode(bytes, [float, uint8], ['temperature', 'humidity']);
+        }
         // BME680 sensor data     
         return decode(bytes, [float, pressure, ufloat, ufloat], ['temperature', 'pressure', 'humidity', 'air']);
     }
@@ -88,14 +91,6 @@ function Decoder(bytes, port) {
         // epoch time answer
         if (bytes.length === 5) {
             return decode(bytes, [uint32, uint8], ['time', 'timestatus']);
-        }
-    }
-
-    if (port === 10) {
-        if (bytes.length === 3) {
-            var decoded = decode(bytes, [float, int8], ['temperature', 'humidity']);
-            decoded['temperature'] = decoded['temperature'] * 10;
-            return decoded;
         }
     }
 

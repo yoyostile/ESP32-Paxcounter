@@ -124,6 +124,16 @@ void PayloadConvert::addBME(bmeStatus_t value) {
 #endif
 }
 
+void PayloadConvert::addDHT(dhtStatus_t value) {
+#if(HAS_DHT)
+  int16_t temperature = (int16_t)(value.temperature);
+  // uint8_t humidity = (uint8_t)(value.humidity);
+  buffer[cursor++] = highByte(temperature);
+  buffer[cursor++] = lowByte(temperature);
+  buffer[cursor++] = value.humidity;
+#endif
+}
+
 void PayloadConvert::addButton(uint8_t value) {
 #ifdef HAS_BUTTON
   buffer[cursor++] = value;
@@ -217,6 +227,13 @@ void PayloadConvert::addBME(bmeStatus_t value) {
   writePressure(value.pressure);
   writeUFloat(value.humidity);
   writeUFloat(value.iaq);
+#endif
+}
+
+void PayloadConvert::addDHT(dhtStatus_t value) {
+#if(HAS_DHT)
+  writeFloat(value.temperature);
+  writeUint8(value.humidity);
 #endif
 }
 

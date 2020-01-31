@@ -76,6 +76,13 @@ void irqHandler(void *pvParameters) {
     }
 #endif
 
+#if (HAS_DHT)
+  if (InterruptStatus & DHT_IRQ) {
+    dht_storedata(&dht_status);
+    InterruptStatus &= ~DHT_IRQ;
+  }
+#endif
+
     // are cyclic tasks due?
     if (InterruptStatus & CYCLIC_IRQ) {
       doHousekeeping();

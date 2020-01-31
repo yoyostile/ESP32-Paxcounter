@@ -48,6 +48,11 @@
 //#define HAS_BMP180
 //#define BMP180_ADDR 0x77
 
+// DHT11/22 sensor
+// #define HAS_DHT                         1
+// #define DHT_TYPE                        DHT22
+// #define DHT_PIN                         GPIO_NUM_17
+
 // user defined sensors
 //#define HAS_SENSORS 1 // comment out if device has user defined sensors
 

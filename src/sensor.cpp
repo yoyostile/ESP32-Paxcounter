@@ -1,9 +1,6 @@
 // Basic Config
 #include "globals.h"
 
-#if (USE_DHT)
-  DHT dht(DHT_PIN, DHT_TYPE);
-#endif
 // Local logging tag
 static const char TAG[] = __FILE__;
 
@@ -11,9 +8,6 @@ static const char TAG[] = __FILE__;
   10 // max. size of user sensor data buffer in bytes [default=20]
 
 void sensor_init(void) {
-  #if (USE_DHT)
-    dht.begin();
-  #endif
   #if (USE_SWITCH)
     pinMode(SWITCH_PIN, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), SwitchIRQ, RISING);
@@ -50,39 +44,32 @@ uint8_t *sensor_read(uint8_t sensor) {
 
   static uint8_t buf[SENSORBUFFER] = {0};
   uint8_t length = 3;
-  uint8_t h;
-  int16_t t;
   int8_t buttonState;
   switch (sensor) {
 
-  #if (USE_DHT)
-  case 1:
-    h = dht.readHumidity();
-    t = 10 * dht.readTemperature();
-
-    buf[0] = length;
-    buf[1] = t >> 8;
-    buf[2] = t;
-    buf[3] = h;
-    break;
-  #endif
-  #if (USE_SWITCH)
-  case 2:
-    buttonState = digitalRead(SWITCH_PIN);
-    if (buttonState == HIGH) {
-      buf[0] = 1;
+    case 1:
+      buf[0] = length;
       buf[1] = 0x01;
-    }
-    break;
-  #endif
-  case 3:
+      buf[2] = 0x02;
+      buf[3] = 0x03;
+      break;
+    #if (USE_SWITCH)
+    case 2:
+      buttonState = digitalRead(SWITCH_PIN);
+      if (buttonState == HIGH) {
+        buf[0] = 1;
+        buf[1] = 0x01;
+      }
+      break;
+    #endif
+    case 3:
 
-    buf[0] = length;
-    buf[1] = 0x01;
-    buf[2] = 0x02;
-    buf[3] = 0x03;
-    break;
-  }
+      buf[0] = length;
+      buf[1] = 0x01;
+      buf[2] = 0x02;
+      buf[3] = 0x03;
+      break;
+    }
 
   return buf;
 }

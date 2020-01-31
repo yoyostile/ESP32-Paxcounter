@@ -9,11 +9,11 @@
 
 // Hardware related definitions for Heltec V2 LoRa-32 Board
 
-//#define HAS_BME 1 // Enable BME sensors in general
+// #define HAS_BME 1 // Enable BME sensors in general
 //#define HAS_BME680 GPIO_NUM_4, GPIO_NUM_15 // SDA, SCL
 //#define BME680_ADDR BME680_I2C_ADDR_PRIMARY // connect SDIO of BME680 to GND 
-//#define HAS_BMP180
-//#define BMP180_ADDR 0x77
+// #define HAS_BMP180
+// #define BMP180_ADDR 0x77
 
 #define HAS_LORA 1       // comment out if device shall not send data via LoRa
 #define CFG_sx1276_radio 1
@@ -28,6 +28,11 @@
 //#define BAT_MEASURE_ADC ADC2_GPIO13_CHANNEL  // battery probe GPIO pin
 //#define BAT_MEASURE_ADC_UNIT 2 // ADC 2
 //#define BAT_VOLTAGE_DIVIDER 2 // voltage divider 220k/100k on board
+
+// DHT11/22 sensor
+#define HAS_DHT                         1
+#define DHT_TYPE                        DHT22
+#define DHT_PIN                         GPIO_NUM_17
 
 #define HAS_SENSORS 1 // comment out if device has user defined sensors
 
