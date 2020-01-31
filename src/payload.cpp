@@ -127,7 +127,6 @@ void PayloadConvert::addBME(bmeStatus_t value) {
 void PayloadConvert::addDHT(dhtStatus_t value) {
 #if(HAS_DHT)
   int16_t temperature = (int16_t)(value.temperature);
-  // uint8_t humidity = (uint8_t)(value.humidity);
   buffer[cursor++] = highByte(temperature);
   buffer[cursor++] = lowByte(temperature);
   buffer[cursor++] = value.humidity;

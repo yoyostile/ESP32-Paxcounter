@@ -10,8 +10,6 @@ DHT dht(DHT_PIN, DHT_TYPE);
 
 Ticker dhtcycler;
 
-#define SEALEVELPRESSURE_HPA (1013.25)
-
 void dhtcycle() { xTaskNotify(irqHandlerTask, DHT_IRQ, eSetBits); }
 
 int dht_init(void) {

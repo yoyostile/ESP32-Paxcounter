@@ -19,7 +19,5 @@ extern dhtStatus_t
 int dht_init();
 void dhtcycle(void);
 void dht_storedata(dhtStatus_t *dht_store);
-void loadState(void);
-void updateState(void);
 
 #endif
