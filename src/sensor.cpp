@@ -4,6 +4,9 @@
 // Local logging tag
 static const char TAG[] = __FILE__;
 
+
+switchStatus_t switch_status = {0};
+
 #define SENSORBUFFER                                                           \
   10 // max. size of user sensor data buffer in bytes [default=20]
 
@@ -55,11 +58,8 @@ uint8_t *sensor_read(uint8_t sensor) {
       break;
     #if (USE_SWITCH)
     case 2:
-      buttonState = digitalRead(SWITCH_PIN);
-      if (buttonState == HIGH) {
-        buf[0] = 1;
-        buf[1] = 0x01;
-      }
+      buf[0] = 1;
+      buf[1] = switch_status.mail;
       break;
     #endif
     case 3:
@@ -72,4 +72,12 @@ uint8_t *sensor_read(uint8_t sensor) {
     }
 
   return buf;
+}
+
+void switch_storedata(switchStatus_t *switch_store) {
+  #if (USE_SWITCH)
+    if (digitalRead(SWITCH_PIN) == HIGH) { 
+      switch_store->mail = HIGH;
+    }
+  #endif
 }

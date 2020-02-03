@@ -10,8 +10,8 @@ esp_err_t err;
 
 #define PAYLOADMASK                                  \
   ((GPS_DATA | ALARM_DATA | MEMS_DATA | COUNT_DATA | \
-    SENSOR1_DATA | SENSOR2_DATA | SENSOR3_DATA) &    \
-   (~BATT_DATA) )
+    SENSOR1_DATA | SENSOR2_DATA | SENSOR3_DATA | BATT_DATA) ) // & \
+   // (~BATT_DATA) )
 
 // populate cfg vars with factory settings
 void defaultConfig() {
@@ -19,7 +19,7 @@ void defaultConfig() {
   cfg.txpower = LORATXPOWDEFAULT; // 0-15, lora tx power
   cfg.adrmode = LORAADRDEFAULT;   // 0=disabled, 1=enabled
   cfg.screensaver = 0;            // 0=disabled, 1=enabled
-  cfg.screenon = 1;               // 0=disabled, 1=enabled
+  cfg.screenon = DISPLAYENABLE;               // 0=disabled, 1=enabled
   cfg.countermode = COUNTERMODE;  // 0=cyclic, 1=cumulative, 2=cyclic confirmed
   cfg.rssilimit = 0;              // threshold for rssilimiter, negative value!
   cfg.sendcycle = SENDCYCLE;      // payload send cycle [seconds/2]

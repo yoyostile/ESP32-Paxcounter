@@ -11,7 +11,7 @@
 
 // #define HAS_BME 1 // Enable BME sensors in general
 //#define HAS_BME680 GPIO_NUM_4, GPIO_NUM_15 // SDA, SCL
-//#define BME680_ADDR BME680_I2C_ADDR_PRIMARY // connect SDIO of BME680 to GND 
+//#define BME680_ADDR BME680_I2C_ADDR_PRIMARY // connect SDIO of BME680 to GND
 // #define HAS_BMP180
 // #define BMP180_ADDR 0x77
 
@@ -19,15 +19,16 @@
 #define CFG_sx1276_radio 1
 
 #define HAS_DISPLAY 1 // OLED-Display on board
-#define HAS_LED LED_BUILTIN                           // white LED on board
-#define HAS_BUTTON KEY_BUILTIN                        // button "PROG" on board
+#define HAS_LED NOT_A_PIN //LED_BUILTIN                           // white LED on board
+// #define HAS_BUTTON KEY_BUILTIN                        // button "PROG" on board
 
 // caveat: activating ADC2 conflicts with Wifi in current arduino-esp32
 // see https://github.com/espressif/arduino-esp32/issues/3222
-// thus we must waiver of battery monitoring 
-//#define BAT_MEASURE_ADC ADC2_GPIO13_CHANNEL  // battery probe GPIO pin
-//#define BAT_MEASURE_ADC_UNIT 2 // ADC 2
-//#define BAT_VOLTAGE_DIVIDER 2 // voltage divider 220k/100k on board
+// thus we must waiver of battery monitoring
+#define BAT_MEASURE_ADC ADC1_GPIO37_CHANNEL
+// #define BAT_MEASURE_ADC ADC2_GPIO13_CHANNEL  // battery probe GPIO pin
+// #define BAT_MEASURE_ADC_UNIT 2 // ADC 2
+#define BAT_VOLTAGE_DIVIDER 3.2 // voltage divider 220k/100k on board
 
 // DHT11/22 sensor
 #define HAS_DHT                         1

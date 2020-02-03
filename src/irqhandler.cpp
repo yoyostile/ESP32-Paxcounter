@@ -36,9 +36,10 @@ void irqHandler(void *pvParameters) {
     }
 #endif
 
-#ifdef USE_SWITCH
+#if (USE_SWITCH)
   if (InterruptStatus & SWITCH_IRQ) {
-    sendData();
+    Serial.println("SWITCH STATUS");
+    switch_storedata(&switch_status);
     InterruptStatus &= ~SWITCH_IRQ;
   }
 #endif

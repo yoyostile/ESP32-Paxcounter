@@ -20,6 +20,7 @@
 #include "timekeeper.h"
 #include "bmesensor.h"
 #include "dhtsensor.h"
+#include "sensor.h"
 #include "power.h"
 
 void irqHandler(void *pvParameters);

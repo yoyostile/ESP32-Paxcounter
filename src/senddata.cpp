@@ -150,9 +150,8 @@ void sendData() {
     case SENSOR2_DATA:
       payload.reset();
       payload.addSensor(sensor_read(2));
-      if (payload.getSize() == 1) {
-        SendPayload(SENSOR2PORT, prio_normal);        
-      }
+      SendPayload(SENSOR2PORT, prio_normal);        
+      switch_status.mail = LOW;
       break;
     #endif
     // case SENSOR3_DATA:

@@ -92,6 +92,10 @@ void doHousekeeping() {
            dht_status.humidity);
 #endif
 
+#if (USE_SWITCH)
+  ESP_LOGI(TAG, "Mail: %d", switch_status.mail);
+#endif
+
   // check free heap memory
   if (ESP.getMinFreeHeap() <= MEM_LOW) {
     ESP_LOGI(TAG,
