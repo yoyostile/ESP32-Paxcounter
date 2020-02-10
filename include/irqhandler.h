@@ -6,6 +6,7 @@
 #define SENDCYCLE_IRQ 0x004
 #define CYCLIC_IRQ 0x008
 #define TIMESYNC_IRQ 0x010
+#define SLEEPCYCLE_IRQ 0x012
 #define MASK_IRQ 0x020
 #define UNMASK_IRQ 0x040
 #define BME_IRQ 0x080

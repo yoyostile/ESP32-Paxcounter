@@ -14,6 +14,9 @@ void sensor_init(void) {
   #if (USE_SWITCH)
     pinMode(SWITCH_PIN, INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(SWITCH_PIN), SwitchIRQ, RISING);
+    if (RTC_runmode == RUNMODE_WAKEUP) {
+      switch_storedata(&switch_status);
+    }
   #endif
 
   // this function is called during device startup
@@ -76,7 +79,7 @@ uint8_t *sensor_read(uint8_t sensor) {
 
 void switch_storedata(switchStatus_t *switch_store) {
   #if (USE_SWITCH)
-    if (digitalRead(SWITCH_PIN) == HIGH) { 
+    if (digitalRead(SWITCH_PIN) == HIGH) {
       switch_store->mail = HIGH;
     }
   #endif

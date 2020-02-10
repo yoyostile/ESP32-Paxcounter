@@ -15,6 +15,7 @@ void dhtcycle() { xTaskNotify(irqHandlerTask, DHT_IRQ, eSetBits); }
 int dht_init(void) {
   dht.begin();
   dhtcycler.attach(DHTCYCLE, dhtcycle);
+  dht_storedata(&dht_status);
   return 1;
 } // dht_init()
 

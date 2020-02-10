@@ -177,7 +177,7 @@ void setup() {
 #endif // VERBOSE
 
   // open i2c bus
-  i2c_init();
+  // i2c_init();
 
 // setup power on boards with power management logic
 #ifdef EXT_POWER_SW
@@ -445,6 +445,7 @@ void setup() {
   // cyclic function interrupts
   sendcycler.attach(SENDCYCLE * 2, sendcycle);
   housekeeper.attach(HOMECYCLE, housekeeping);
+  sleepcycle.attach(SLEEPCYCLE, sleepcycling);
 
 #if (TIME_SYNC_INTERVAL)
 
@@ -475,6 +476,8 @@ void setup() {
 
   // show compiled features
   ESP_LOGI(TAG, "Features:%s", features);
+  // if (RTC_runmode == RUNMODE_WAKEUP)
+  //   sendData();
 
   // set runmode to normal
   RTC_runmode = RUNMODE_NORMAL;

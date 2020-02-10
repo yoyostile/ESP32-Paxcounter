@@ -63,7 +63,7 @@ void sendData() {
 
   uint8_t bitmask = cfg.payloadmask;
   uint8_t mask = 1;
-  #if (HAS_GPS) 
+  #if (HAS_GPS)
   gpsStatus_t gps_status;
   #endif
 
@@ -148,10 +148,12 @@ void sendData() {
     //   break;
     #if (USE_SWITCH)
     case SENSOR2_DATA:
-      payload.reset();
-      payload.addSensor(sensor_read(2));
-      SendPayload(SENSOR2PORT, prio_normal);        
-      switch_status.mail = LOW;
+      if (switch_status.mail != LOW) {
+        payload.reset();
+        payload.addSensor(sensor_read(2));
+        SendPayload(SENSOR2PORT, prio_normal);
+        switch_status.mail = LOW;
+      }
       break;
     #endif
     // case SENSOR3_DATA:

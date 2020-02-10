@@ -38,7 +38,6 @@ void irqHandler(void *pvParameters) {
 
 #if (USE_SWITCH)
   if (InterruptStatus & SWITCH_IRQ) {
-    Serial.println("SWITCH STATUS");
     switch_storedata(&switch_status);
     InterruptStatus &= ~SWITCH_IRQ;
   }
@@ -88,6 +87,15 @@ void irqHandler(void *pvParameters) {
     if (InterruptStatus & CYCLIC_IRQ) {
       doHousekeeping();
       InterruptStatus &= ~CYCLIC_IRQ;
+    }
+
+    // ready for sleep?
+    if (InterruptStatus & SLEEPCYCLE_IRQ) {
+      if (LMIC.devaddr) {
+        Serial.println("Going to sleep...");
+        enter_deepsleep(600, SWITCH_PIN);
+      }
+      InterruptStatus &= ~SLEEPCYCLE_IRQ;
     }
 
 // do we have a power event?

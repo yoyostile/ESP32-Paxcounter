@@ -25,7 +25,7 @@ void do_reset(bool warmstart) {
 }
 
 void do_after_reset(int reason) {
-
+  ESP_LOGI(TAG, "wakeup reason %d", reason);
   switch (reason) {
 
   case POWERON_RESET:          // 0x01 Vbat power on reset
@@ -87,8 +87,10 @@ void enter_deepsleep(const int wakeup_sec, const gpio_num_t wakeup_gpio) {
 
   // set wakeup gpio
   if (wakeup_gpio != NOT_A_PIN) {
-    rtc_gpio_isolate(wakeup_gpio);
-    esp_sleep_enable_ext1_wakeup(1ULL << wakeup_gpio, ESP_EXT1_WAKEUP_ALL_LOW);
+    // rtc_gpio_isolate(wakeup_gpio);
+    rtc_gpio_pullup_en(wakeup_gpio);
+    esp_sleep_enable_ext0_wakeup(wakeup_gpio, 1);
+    // esp_sleep_enable_ext1_wakeup(1ULL << wakeup_gpio, ESP_EXT1_WAKEUP_ALL_LOW);
   }
 
   // halt interrupts accessing i2c bus

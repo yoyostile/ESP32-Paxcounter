@@ -5,6 +5,8 @@
 // Local logging tag
 static const char TAG[] = __FILE__;
 
+Ticker sleepcycle;
+
 #ifdef BAT_MEASURE_ADC
 esp_adc_cal_characteristics_t *adc_characs =
     (esp_adc_cal_characteristics_t *)calloc(
@@ -18,6 +20,10 @@ static const adc2_channel_t adc_channel = BAT_MEASURE_ADC;
 static const adc_atten_t atten = ADC_ATTEN_DB_11;
 static const adc_unit_t unit = ADC_UNIT_1;
 #endif // BAT_MEASURE_ADC
+
+void sleepcycling() {
+  xTaskNotifyFromISR(irqHandlerTask, SLEEPCYCLE_IRQ, eSetBits, NULL);
+}
 
 #ifdef HAS_PMU
 AXP20X_Class pmu;

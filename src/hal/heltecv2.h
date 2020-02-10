@@ -18,7 +18,7 @@
 #define HAS_LORA 1       // comment out if device shall not send data via LoRa
 #define CFG_sx1276_radio 1
 
-#define HAS_DISPLAY 1 // OLED-Display on board
+// #define HAS_DISPLAY 1 // OLED-Display on board
 #define HAS_LED NOT_A_PIN //LED_BUILTIN                           // white LED on board
 // #define HAS_BUTTON KEY_BUILTIN                        // button "PROG" on board
 
@@ -28,7 +28,7 @@
 #define BAT_MEASURE_ADC ADC1_GPIO37_CHANNEL
 // #define BAT_MEASURE_ADC ADC2_GPIO13_CHANNEL  // battery probe GPIO pin
 // #define BAT_MEASURE_ADC_UNIT 2 // ADC 2
-#define BAT_VOLTAGE_DIVIDER 3.2 // voltage divider 220k/100k on board
+#define BAT_VOLTAGE_DIVIDER 3.130266342 // voltage divider 220k/100k on board
 
 // DHT11/22 sensor
 #define HAS_DHT                         1

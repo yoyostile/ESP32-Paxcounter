@@ -262,8 +262,8 @@ void lora_send(void *pvParameters) {
     // attempt to transmit payload
     else {
 
-      // switch (LMIC_sendWithCallback_strict(
       switch (LMIC_sendWithCallback_strict(
+      // switch (LMIC_sendWithCallback(
           SendBuffer.MessagePort, SendBuffer.Message, SendBuffer.MessageSize,
           (cfg.countermode & 0x02), myTxCallback, NULL)) {
 
@@ -323,6 +323,8 @@ esp_err_t lora_stack_init(bool do_join) {
     LMIC_setSession(RTCnetid, RTCdevaddr, RTCnwkKey, RTCartKey);
     LMIC.seqnoUp = RTCseqnoUp;
     LMIC.seqnoDn = RTCseqnoDn;
+    LMIC_setAdrMode(cfg.adrmode);
+    LMIC_setDrTxpow(assertDR(cfg.loradr), cfg.txpower);
   }
 
   // start lmic send task

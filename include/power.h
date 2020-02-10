@@ -14,6 +14,9 @@ uint16_t read_voltage(void);
 void calibrate_voltage(void);
 bool batt_sufficient(void);
 
+extern Ticker sleepcycle;
+void sleepcycling(void);
+
 #ifdef HAS_PMU
 
 #include <axp20x.h>
